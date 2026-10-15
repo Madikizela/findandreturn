@@ -1,0 +1,20 @@
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Webhook: accept both /whatsapp_webhook and /whatsapp_webhook.php without redirect
+RewriteCond %{REQUEST_URI} whatsapp_webhook
+RewriteRule ^whatsapp_webhook/?$ whatsapp_webhook.php [NC,L]
+
+# 1. Redirect /file.php to /file (skip for webhook and api folder)
+RewriteCond %{REQUEST_URI} !whatsapp_webhook\.php$
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# 2. Internally rewrite /file to /file.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*?)/?$ $1.php [NC,QSA,L]

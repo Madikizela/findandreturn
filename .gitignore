@@ -1,0 +1,44 @@
+# Environment files — never commit secrets
+.env
+.env.local
+.env.*.local
+
+# Logs
+wa_webhook_debug.log
+whatsapp_debug.log
+mailer_debug.log
+error_log
+*.log
+
+# Node
+node_modules/
+
+# Vendor (PHP Composer dependencies)
+vendor/
+
+# Uploaded files (user content — too large and not code)
+uploads/
+images/
+product-images/
+
+# IDE / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Temporary / debug files
+debug_*.php
+fix_*.php
+test_*.php
+quick_debug.php
+simulate_webhook.php
+check_*.php
+check_orders_table.php
+setup_test_users.php
+apply_security_fixes.php
+add_missing_columns.php
+smart_add_columns.php
+migrate_data.php
+
+# Zip / archives
+*.zip
